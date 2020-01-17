@@ -16,6 +16,19 @@ router.get('/', (req, res) => {
         });
       });
 })
+router.post("/", validateAction,(req, res) => {
+
+    actionModel
+      .insert(req.body)
+      .then(res.status(201).json(req.body))
+      .catch(() => {
+        res
+          .status(500)
+          .json({
+            error: "There was an error while saving the project to the database"
+          });
+      });
+  });
 
 router.get("/:id", validateActionId,(req, res) => {
   actionModel
